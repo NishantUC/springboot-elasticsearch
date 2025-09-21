@@ -1,0 +1,106 @@
+openapi: 3.0.3
+info:
+  title: ElasticSearch Practice Service
+  description: |
+    A microservice for practicing ElasticSearch operations with Spring Boot.
+    Supports CRUD operations, nested object manipulation, and change data capture via Debezium.
+  version: 1.0.0
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+paths:
+  /ecommerce/{id}:
+    get:
+      tags:
+        - Get the Ecommerce data
+      summary: Get the Ecommerce for the id
+      description: Retrieve the Ecommerce Data
+      operationId: getECommerceData
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EcommerceData'
+
+components:
+  schemas:
+    GetUsersResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/EcommerceData'
+        totalCount:
+          type: integer
+          description: Total number of users (optional)
+          example: 150
+
+    UserList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EcommerceData'
+
+    EcommerceData:
+      type: object
+      properties:
+        country:
+          type: string
+          description: Country
+        customerID:
+          type: number
+          format: int64
+          description: Customer ID
+        description:
+          type: string
+          description: Description
+        invoiceDate:
+          type: string
+          format: date-time
+          description: InvoiceDate
+        invoiceNo:
+          type: string
+          description: Invoice number
+        quantity:
+          type: number
+          format: int64
+          description: Quantity
+        stockCode:
+          type: string
+          description: User email address
+        unitPrice:
+          type: number
+          format: double
+          description: Unit Price
+
+    UserRequest:
+      type: object
+      required:
+        - email
+      properties:
+        name:
+          type: string
+          description: Full name of the user
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          description: User email address
+          example: "john.doe@example.com"
+        password:
+          type: string
+          format: password
+          description: User password (should be hashed in real implementation)
+          writeOnly: true
+          example: "hashedPassword123"
+
