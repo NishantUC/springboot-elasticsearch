@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
 
 paths:
-  /ecommerce/{id}:
+  /ecommerce/document/{id}:
     get:
       tags:
         - Get the Ecommerce data
@@ -31,6 +31,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EcommerceData'
+  /ecommerce/country/{countryId}:
+    get:
+      tags:
+        - Get the Ecommerce data
+      summary: Get the Ecommerce data for the country
+      description: Retrieve the Ecommerce Data for the country
+      operationId: getCountryData
+      parameters:
+        - name: countryId
+          in: path
+          description: Country
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ECommerceList'
 
 components:
   schemas:
@@ -46,7 +67,7 @@ components:
           description: Total number of users (optional)
           example: 150
 
-    UserList:
+    ECommerceList:
       type: array
       items:
         $ref: '#/components/schemas/EcommerceData'

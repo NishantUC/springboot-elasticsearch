@@ -19,4 +19,9 @@ public class EcommerceDataServiceImpl implements EcommerceDataService{
     public EcommerceData findById(String country) {
         return accessStrategy.findById(country);
     }
+
+    @Override
+    public List<EcommerceData> findByCountry(String country) {
+        return accessStrategy.findByCountry(country);
+    }
 }

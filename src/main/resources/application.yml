@@ -13,3 +13,6 @@ server:
 data:
   access:
     strategy: elasticSearchTemplate
+query:
+  builder: CriteriaQuery
+
